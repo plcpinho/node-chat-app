@@ -5,7 +5,12 @@
   "background_color": "#ffffff",
   "display": "standalone",
   "Scope": "/",
-  "start_url": ".",
+  "start_url": "my-pwa-chat.herokuapp.com/",
+  "intent_filters": {
+    "scope_url_scheme": "https",
+    "scope_url_host": "my-pwa-chat.herokuapp.com",
+    "scope_url_path": "/"
+  },
   "icons": [
     {
       "src": "./img/icons/icon-72x72.png",
