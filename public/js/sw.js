@@ -1,3 +1,6 @@
+// NOTE Using WorkBox from Google to simplify the Service Worker code
+importScripts('./node_modules/workbox-sw/build/workbox-sw.js')
+
 const staticAssets = [
   '../',
   './app.js',
@@ -5,20 +8,6 @@ const staticAssets = [
   '../css/styles.min.css'
 ];
 
-// NOTE Caso o service worker nao esteja instalado no browser
-self.addEventListener('install', async event => {
-  const cache = await caches.open('new-static');
-  cache.addAll(staticAssets);
-});
+const wb = new WorkboxSW();
 
-// NOTE Application to the network
-self.addEventListener('fetch', event => {
-  console.log('fetch');
-  const req = event.request;
-  event.respondWith(cacheFirst(req));
-});
-
-async function cacheFirst(req) {
-  const cachedResponse = await caches.match(req);
-  return cacheResponse || fetch(req);
-}
+wb.precache(staticAssets);
